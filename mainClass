@@ -1,0 +1,41 @@
+    
+import sys
+from chatHistory import StateFullAssistant
+from BoundedMemoryAssistant import BoundedMemoryAssistant
+from pathlib import Path
+
+
+def main():
+    assistant = StateFullAssistant()
+    print("Welcome to the AI Chat Assistant! Type 'exit' to quit.")
+    while True:
+        user_input = input("\nUser: ").strip() 
+        #user_input = input().strip()
+        
+        if user_input.lower() == 'exit':
+            print("Exiting the chat. Goodbye!")
+            break
+        
+        #if not user_input:
+            #print("Please enter a message.")
+            #continue 
+        if user_input.lower() == 'clear':
+            assistant.clean_memory()
+            print("Memory cleared.")
+            continue
+        if user_input.lower() == 'inspect':
+            assistant.inspect_memory()
+            continue
+        if user_input.lower() == 'show history':
+            assistant.show_conversation()
+            continue
+        if user_input.lower() == 'prune':
+            
+            print("Memory pruned.")
+            continue
+        
+        assistant.chat_stream(user_input)
+        
+        
+if __name__ == "__main__":
+    main()        
